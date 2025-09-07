@@ -6,7 +6,7 @@ export const prisma = globalPrisma.prisma || new PrismaClient({
   log: ['query'],
 });
 
-type User = {
+export type User = {
   id: string,
   name: string,
   email: string,
@@ -15,7 +15,7 @@ type User = {
   createdAt: Date,
 };
 
-type Application = {
+export type Application = {
   id: string,
   company: string,
   position: string,
@@ -27,11 +27,9 @@ type Application = {
   userId: string
 }
 
-enum Status {
+export enum Status {
   APPLIED,
   INTERVIEW,
   OFFER,
   REJECTED,
 }
-
-export default User;
