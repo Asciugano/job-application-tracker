@@ -12,4 +12,6 @@ export const generateToken = async (userID: string, res: NextResponse) => {
     sameSite: "strict",
     secure: false,
   });
+
+  return res;
 };

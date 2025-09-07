@@ -4,20 +4,20 @@ import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-  const body = await req.json();
-  const user = await prisma.user.findFirst({
+  const { email, password } = await req.json();
+
+  const user = await prisma.user.findUnique({
     where: {
-      email: body.email,
+      email: email
     }
   });
 
-  if (!user) return NextResponse.json({ error: true, message: "Credenziali non valide" });
+  if (!user) return NextResponse.json({ error: true, message: "Credenziali non valide" }, { status: 401 });
 
-  const isPasswordCorrect = await bcrypt.compare(body.password, user.password);
-  if (isPasswordCorrect) return NextResponse.json({ error: true, message: "Credenziali non valide" });
+  const isPasswordCorrect = await bcrypt.compare(password, user.password);
+  if (!isPasswordCorrect) return NextResponse.json({ error: true, message: "Credenziali non valide" }, { status: 401 });
 
   const res = NextResponse.json({ message: "Login effettuato" });
-  const token = generateToken(user.id, res);
+  return generateToken(user.id, res);
 
-  return token;
 }

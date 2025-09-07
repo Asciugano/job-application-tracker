@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import axios from "axios";
-import { Eye, EyeOff, Lock, Mail, User } from "lucide-react";
+import { Eye, EyeOff, Loader, Lock, Mail, User } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function LoginComponent() {
   const [formData, setFormData] = useState({
@@ -11,10 +12,30 @@ export default function LoginComponent() {
     password: "",
     name: "",
   });
+
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
+    try {
+      const res = await axios.post('/api/auth/signup', formData, { withCredentials: true });
+
+      if (res.data.error) {
+        setError(res.data.message);
+      } else {
+        router.push('/');
+      }
+    } catch (e) {
+      console.error(e);
+      setError("Qualcosa e' andato storto");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -93,11 +114,14 @@ export default function LoginComponent() {
           </div>
         </div>
 
+        {(error || error.length > 0) && (
+          <p className="text-red-500 text-sm">{error}</p>
+        )}
         <button
           type="submit"
-          className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-indigo-700 transition duration-200"
+          className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-indigo-700 transition duration-200 text-center flex items-center justify-center"
         >
-          Login
+          {loading ? <Loader className="animate-spin" size={32} /> : "Registrati"}
         </button>
 
         <p className="mt-6 text-sm text-center text-gray-600 dark:text-gray-400">
