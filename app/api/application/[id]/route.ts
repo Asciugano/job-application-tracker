@@ -1,9 +1,11 @@
 import { NextResponse } from "next/server";
 
-export function PATCH(req: Request) {
-  return NextResponse.json({ body: req.body, message: "aggiorna status, note o deadline" });
+export async function PATCH(req: Request) {
+  const { user_id } = await req.json();
+  return NextResponse.json({ user_id, message: "aggiorna status, note o deadline" });
 }
 
-export function DELETE(req: Request) {
-  return NextResponse.json({ body: req.body, messaeg: "elimina candidatura" });
+export async function DELETE(req: Request) {
+  const { user_id } = await req.json();
+  return NextResponse.json({ user_id, messaeg: "elimina candidatura" });
 }
