@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
+import { generateToken } from "@/lib/utils";
 
 export async function POST(req: Request) {
   const { name, email, password } = await req.json();
@@ -17,6 +18,8 @@ export async function POST(req: Request) {
 
   if (!user) return NextResponse.json({ error: true, message: "Errore nella creazione dell'utente" });
 
-  return NextResponse.json({ user });
+  const res = NextResponse.json({ message: "Sign up effettuato" });
+  const token = generateToken(user.id, res);
 
-}
+  return token;
+};
