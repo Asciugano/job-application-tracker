@@ -1,6 +1,5 @@
 "use client";
 
-import { Status } from "@/lib/prisma";
 import axios from "axios";
 import { Briefcase, Building2, Calendar, ChevronsDown, Loader2, MapPin, StickyNote } from "lucide-react";
 import { useRouter } from "next/navigation";
