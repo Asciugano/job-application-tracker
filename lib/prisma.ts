@@ -28,8 +28,8 @@ export type Application = {
 }
 
 export enum Status {
-  APPLIED,
-  INTERVIEW,
-  OFFER,
-  REJECTED,
+  APPLIED = "APPLIED",
+  INTERVIEW = "INTERVIEW",
+  OFFER = "OFFER",
+  REJECTED = "REJECTED",
 }

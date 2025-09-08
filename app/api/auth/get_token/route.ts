@@ -1,5 +1,4 @@
 import { getIDFromToken } from "@/lib/utils";
-import { error } from "console";
 import { NextResponse } from "next/server";
 
 export async function GET() {

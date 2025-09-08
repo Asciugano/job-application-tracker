@@ -40,12 +40,12 @@ export default function ApplicationCard({ application }: { application: Applicat
       <div className="mt-3 text-sm text-gray-500 dark:text-gray-400 space-y-1">
         <div className="flex items-center">
           <Calendar size={14} className="mr-2" />
-          <span>Applied: {new Date(application.appliedAt).toLocaleDateString()}</span>
+          <span>Applied: {new Date(application.appliedAt).toISOString().split("T")[0]}</span>
         </div>
         {application.deadline && (
           <div className="flex items-center">
             <Calendar size={14} className="mr-2" />
-            <span>Deadline: {new Date(application.deadline).toLocaleDateString()}</span>
+            <span>Deadline: {new Date(application.deadline).toISOString().split("T")[0]}</span>
           </div>
         )}
       </div>
