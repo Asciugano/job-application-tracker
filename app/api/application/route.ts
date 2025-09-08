@@ -22,7 +22,7 @@ export async function POST(req: Request) {
     });
   }
 
-  if (!applications) return NextResponse.json({ error: true, message: "Impossibile prendere le applicazioni per questo utente" }, { status: 500 });
+  // if (!applications) return NextResponse.json({ error: true, message: "Impossibile prendere le applicazioni per questo utente" }, { status: 500 });
 
   return NextResponse.json({ applications });
 }

@@ -10,7 +10,7 @@ export async function POST(req: Request) {
       company,
       position,
       location,
-      deadline,
+      deadline: deadline ? new Date(deadline) : null,
       notes
     }
   });

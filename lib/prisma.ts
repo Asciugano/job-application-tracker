@@ -20,10 +20,10 @@ export type Application = {
   company: string,
   position: string,
   status: Status,
-  location: string,
+  location?: string,
   appliedAt: Date,
-  deadline: Date,
-  notes: string,
+  deadline?: Date,
+  notes?: string,
   userId: string
 }
 
